@@ -1,5 +1,4 @@
-# Set to TRUE to attempt the download automatically
-# May not work on all platforms or in VM environments
+
 download.file.automatically <- TRUE
 
 data.file <- 'https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip'
@@ -8,33 +7,6 @@ local.data.dir <- './UCI HAR Dataset'
 tidy.data.file <- './tidy-UCI-HAR-dataset.csv'
 tidy.avgs.data.file <- './tidy-UCI-HAR-avgs-dataset.csv'
 tidy.avgs.data.txt <- './tidy-UCI-HAR-avgs-dataset.txt'
-
-
-
-
-# Make sure the original data file is in the working directry, downloading
-# it if needed (and allowed)
-if (! file.exists(localfile)) {
-  if (download.file.automatically) {
-    download.file(data.file,
-                  destfile = localfile)
-  }
-}
-
-# Crash if file is not present
-if (! file.exists(localfile)) {
-  stop(paste(localfile, 'must be present in working directory.'))
-}
-
-# Uncompress the original data file
-if (! file.exists(local.data.dir)) {
-  unzip(localfile)
-}
-
-# Fail if unzip failed
-if (! file.exists(local.data.dir)) {
-  stop(paste('Unable to unpack the compressed data.'))
-}
 
 # Read activity labels
 acts <- read.table(paste(local.data.dir, 'activity_labels.txt', sep = '/'),
